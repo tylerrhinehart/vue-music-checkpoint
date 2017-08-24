@@ -7,12 +7,17 @@ vue.use(vuex)
 var store = new vuex.Store({
   state: {
     myTunes: [],
-    results: []
+    results: [],
+    showMyMusic: false
   },
   mutations: {
-    setResults(state, results){
-      state.results = results
-    }
+    setResults(state, data){
+      state.results = data.results
+      console.log(data.results[0])
+    },
+    // getMyTunes(state) {
+    //   state.showMyMusic = true
+    // }
   },
   actions: {
     getMusicByArtist({commit, dispatch}, artist) {
@@ -20,14 +25,18 @@ var store = new vuex.Store({
       var url2 = 'https://itunes.apple.com/search?term=' + artist;
       var apiUrl = url + encodeURIComponent(url2);
       $.get(apiUrl).then(data=>{
-        commit('setResults', data)
+        commit('setResults', JSON.parse(data))
       })
     },
     getMyTunes({commit, dispatch}){
       //this should send a get request to your server to return the list of saved tunes
+      // commit('getMyTunes')
     },
     addToMyTunes({commit, dispatch}, track){
       //this will post to your server adding a new track to your tunes
+      $.post('//localhost:3000/api/playlists', track).then(
+        getMyTunes()
+      )
     },
     removeTrack({commit, dispatch}, track){
       //Removes track from the database with delete
