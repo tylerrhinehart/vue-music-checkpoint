@@ -1,11 +1,11 @@
 let router = require('express').Router()
 let Users = require('../models/user')
 
-//NOT /api/register   /register
 router.post('/register', (req, res) => {
   Users.create(req.body)
     .then((user) => {
-      req.session.uid = user._id // WE ISSUE A JWT TOKEN
+      console.log(req)
+      req.session.uid = user.id
       req.session.save()
       user.password = null
       delete user.password

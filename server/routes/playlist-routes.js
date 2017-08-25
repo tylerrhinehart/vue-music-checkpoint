@@ -4,19 +4,26 @@ var playlists = require('../models/playlist')
 
 //Standard routes get/push/put/delete 
 router
-    .get('/', (req, res, next) => {
-        playlists.find({})
+    .get('/playlist/:userId', (req, res, next) => {
+        playlists.findById(req.params.userId)
             .then(playlists => {
                 res.send(playlists)
             })
             .catch(next)
     })
 
+    .get('/:id', (req, res, next) => {
+        playlists.findById(req.params.id)
+            .then(playlist => {
+                res.send(playlist)
+            }).catch(next)
+    })
+
 
     .post('/', (req, res, next) => {
         playlists.create(req.body)
             .then(playlist => {
-                res.send("Success")
+                res.send(playlist)
             }).catch(next)
     })
 

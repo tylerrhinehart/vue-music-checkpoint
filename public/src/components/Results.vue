@@ -33,7 +33,15 @@
     },
     methods: {
       addToMyTunes(song) {
-        this.$store.dispatch('addToMyTunes', song)
+        var newSong = {
+          trackName: song.trackName,
+          artistName: song.artistName,
+          collectionName: song.collectionName,
+          previewUrl: song.previewUrl,
+          userId: '',
+          playlistId: '' 
+        }
+        this.$store.dispatch('addToMyTunes', newSong)
       }
     },
     computed: {
