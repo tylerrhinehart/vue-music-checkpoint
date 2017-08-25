@@ -21,7 +21,7 @@ var store = new vuex.Store({
     },
     getMyTunes(state, data) {
       state.playlists = data
-      console.log(state.playlists)
+      console.log(data)
     },
     login(state, user) {
       state.user = user.data
@@ -38,6 +38,9 @@ var store = new vuex.Store({
     setCurrentPlaylist(state, payload) {
       state.currentPlaylist = payload
       state.currentList = true
+    },
+    showPlaylists(state) {
+      state.currentList = false
     }
   },
   actions: {
@@ -79,6 +82,9 @@ var store = new vuex.Store({
       $.get('//localhost:3000/api/playlists/' + payload).then(playlist => {
         commit('setCurrentPlaylist', playlist)
       })
+    },
+    showPlaylists({ commit, dispatch }) {
+      commit('showPlaylists')
     },
     signup({ commit, dispatch }, user) {
       $.post('//localhost:3000/register', user).then((user) => {

@@ -5,7 +5,7 @@ var playlists = require('../models/playlist')
 //Standard routes get/push/put/delete 
 router
     .get('/playlist/:userId', (req, res, next) => {
-        playlists.findById(req.params.userId)
+        playlists.find({userId: req.params.userId})
             .then(playlists => {
                 res.send(playlists)
             })

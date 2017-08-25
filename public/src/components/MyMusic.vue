@@ -1,14 +1,19 @@
 <template>
     <div id="my-music">
         <h4>My Music</h4>
-        <ul v-show="!currentList" v-for="playlist in playlists">
-            <li @click="setCurrentPlaylist(playlist._id)">{{playlist.title}}</li>
-        </ul>
-        <ul v-show="currentList" v-for="song in currentPlaylist.songs">
-            <li>{{song.trackName}}</li>
-        </ul>
+        <div v-show="!currentList">
+            <ul v-for="playlist in playlists">
+                <li @click="setCurrentPlaylist(playlist._id)">{{playlist.title}}</li>
+            </ul>
+        </div>
+        <div v-show="currentList">
+            <ul v-for="song in currentPlaylist.songs">
+                <li>{{song.trackName}}</li>
+            </ul>
+        </div>
         <input type="text" placeholder="Playlist Name" v-model="playlistName">
         <button type="button" @click="addPlaylist">Add Playlist</button>
+        <button type="button" @click="showPlaylists">Show All Playlists</button>
     </div>
 </template>
 
@@ -32,6 +37,9 @@
             },
             setCurrentPlaylist(id) {
                 this.$store.dispatch('setCurrentPlaylist', id)
+            },
+            showPlaylists() {
+                this.$store.dispatch('showPlaylists')
             }
         },
         computed: {
