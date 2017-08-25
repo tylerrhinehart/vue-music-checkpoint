@@ -7,6 +7,7 @@
             </ul>
         </div>
         <div v-show="currentList">
+            <h4>{{currentPlaylist.title}}</h4>
             <ul v-for="song in currentPlaylist.songs">
                 <li>{{song.trackName}}</li>
             </ul>

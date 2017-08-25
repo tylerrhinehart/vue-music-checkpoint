@@ -5,7 +5,7 @@ var playlists = require('../models/playlist')
 //Standard routes get/push/put/delete 
 router
     .get('/playlist/:userId', (req, res, next) => {
-        playlists.find({userId: req.params.userId})
+        playlists.find({ userId: req.params.userId })
             .then(playlists => {
                 res.send(playlists)
             })
@@ -19,6 +19,12 @@ router
             }).catch(next)
     })
 
+    .put('/:id', (req, res, next) => {
+        playlists.findByIdAndUpdate(req.params.id, req.body)
+            .then(playlist => {
+                res.send({message: 'successfully added song'})
+            }).catch(next)
+    })
 
     .post('/', (req, res, next) => {
         playlists.create(req.body)

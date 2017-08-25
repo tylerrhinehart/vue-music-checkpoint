@@ -17,7 +17,6 @@ var store = new vuex.Store({
   mutations: {
     setResults(state, data) {
       state.results = data.results
-      console.log(data.results[0])
     },
     getMyTunes(state, data) {
       state.playlists = data
@@ -38,6 +37,7 @@ var store = new vuex.Store({
     setCurrentPlaylist(state, payload) {
       state.currentPlaylist = payload
       state.currentList = true
+      console.log(state.currentPlaylist)
     },
     showPlaylists(state) {
       state.currentList = false
@@ -53,16 +53,22 @@ var store = new vuex.Store({
       })
     },
     getMyTunes({ commit, dispatch }, id) {
-      //this should send a get request to your server to return the list of saved tunes
       $.get('//localhost:3000/api/playlists/playlist/' + id).then((data) => {
         commit('getMyTunes', data)
       })
     },
-    addToMyTunes({ commit, dispatch }, track) {
-      //this will post to your server adding a new track to your tunes
-      $.post('//localhost:3000/api/songs', track).then(
-        getMyTunes()
-      )
+    addToMyTunes({ commit, dispatch }, payload) {
+      $.ajax({
+        contentType: 'application/json',
+        method: 'PUT',
+        url: '//localhost:3000/api/playlists/' + payload._id,
+        data: JSON.stringify(payload)
+      })
+        .then(() => {
+          commit('setCurrentPlaylist', payload)
+          debugger
+        })
+        .fail(() => logError())
     },
     removeTrack({ commit, dispatch }, track) {
       //Removes track from the database with delete
@@ -106,8 +112,10 @@ var store = new vuex.Store({
         .then(commit('logout'))
       //.fail(logError)
 
+    },
+    logError(err) {
+      console.error('UMM SOMETHING BROKE: ', err)
     }
-
   }
 })
 

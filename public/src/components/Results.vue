@@ -15,7 +15,7 @@
             <audio controls class="audio-controls" id="${id}">
               <source :src="song.previewUrl" type="audio/mp4" />
             </audio>
-            <button type="button" class="btn btn-primary" @click="addToMyTunes(song)"></button>
+            <button type="button" class="btn btn-primary" @click="addToMyTunes(song)">Add to Playlist</button>
           </div>
         </div>
       </div>
@@ -33,15 +33,19 @@
     },
     methods: {
       addToMyTunes(song) {
-        var newSong = {
+        var song = {
           trackName: song.trackName,
           artistName: song.artistName,
           collectionName: song.collectionName,
           previewUrl: song.previewUrl,
-          userId: '',
-          playlistId: '' 
+          userId: this.$store.state.user._id,
+          playlistId: this.$store.state.currentPlaylist._id
         }
-        this.$store.dispatch('addToMyTunes', newSong)
+        var playlist = this.$store.state.currentPlaylist
+        playlist.songs.push(song)
+        console.log(playlist)
+        debugger
+        this.$store.dispatch('addToMyTunes', playlist)
       }
     },
     computed: {
