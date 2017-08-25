@@ -44,7 +44,6 @@
         var playlist = this.$store.state.currentPlaylist
         playlist.songs.push(song)
         console.log(playlist)
-        debugger
         this.$store.dispatch('addToMyTunes', playlist)
       }
     },

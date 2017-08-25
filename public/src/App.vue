@@ -27,8 +27,8 @@
         <div v-else class="col-xs-12">
           <results></results>
         </div>
-        <div class="col-xs-3">
-          <div v-if="showMyMusic">
+        <div v-if="loggedIn" class="col-xs-3">
+          <div>
             <MyMusic></MyMusic>
           </div>
         </div>

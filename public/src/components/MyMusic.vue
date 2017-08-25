@@ -35,6 +35,7 @@
                 }
 
                 this.$store.dispatch('addPlaylist', playlist)
+                this.playlistName = ''
             },
             setCurrentPlaylist(id) {
                 this.$store.dispatch('setCurrentPlaylist', id)

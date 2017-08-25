@@ -37,7 +37,6 @@ var store = new vuex.Store({
     setCurrentPlaylist(state, payload) {
       state.currentPlaylist = payload
       state.currentList = true
-      console.log(state.currentPlaylist)
     },
     showPlaylists(state) {
       state.currentList = false
@@ -66,7 +65,6 @@ var store = new vuex.Store({
       })
         .then(() => {
           commit('setCurrentPlaylist', payload)
-          debugger
         })
         .fail(() => logError())
     },
