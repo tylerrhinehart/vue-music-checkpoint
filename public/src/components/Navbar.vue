@@ -13,15 +13,16 @@
                     <a class="navbar-brand" href="#">Tyler Rhinehart- Vue Music Checkpoint</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <form v-show="!loggedIn" class="navbar-form navbar-right">
+                    <form v-show="!loggedIn" class="navbar-form navbar-right" @submit.prevent="login">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="email" v-model="email">
-                            <input type="password" class="form-control" placeholder="password" v-model="password">
+                            <input type="text" class="form-control" placeholder="email" v-model="email" required>
+                            <input type="password" class="form-control" placeholder="password" v-model="password" required>
                         </div>
-                        <button type="button" class="btn btn-default" @click="login">Login</button>
+                        <button type="submit" class="btn btn-default">Login</button>
                         <button type="button" class="btn btn-default" @click="signup">Signup</button>
                     </form>
                     <div v-show="loggedIn" class="nav navbar navbar-right">
+                        <h4>Hello, {{user.email}}</h4>
                         <button type="button" class="btn btn-default" @click="logout">Logout</button>
                     </div>
                     <!-- <ul class="nav navbar-nav navbar-right">
@@ -72,6 +73,9 @@
             }
         },
         computed: {
+            user() {
+                return this.$store.state.user
+            }
         }
     }
 

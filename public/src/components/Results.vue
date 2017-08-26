@@ -12,7 +12,7 @@
             <h4>{{song.artistName}}</h4>
             <h5>{{song.collectionName}}</h5>
             <p>${{song.collectionPrice}}</p>
-            <audio controls class="audio-controls" id="${id}">
+            <audio controls class="audio-controls">
               <source :src="song.previewUrl" type="audio/mp4" />
             </audio>
             <button type="button" class="btn btn-primary" @click="addToMyTunes(song)">Add to Playlist</button>

@@ -29,6 +29,9 @@ var store = new vuex.Store({
     logout(state) {
       state.user = {}
       state.loggedIn = false
+      stae.currentPlaylist = {}
+      state.playlists = []
+      state.currentList = false
     },
     addPlaylist(state, payload) {
       state.playlists.push(payload)

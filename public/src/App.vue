@@ -10,10 +10,10 @@
         </div>
         <div class="row search-form">
           <div class="col-xs-12">
-            <form class="form-inline">
+            <form class="form-inline" @submit.prevent="getMusic">
               <div class="form-group">
                 <input v-model="query" type="text" class="form-control" placeholder="Search for Music" />
-                <button type="button" class="btn btn-primary" @click="getMusic">Get Music</button>
+                <button type="button" class="btn btn-primary">Get Music</button>
                 <button v-show="loggedIn" type="button" class="btn btn-primary" @click="getMyTunes">Show My Music</button>
               </div>
             </form>
@@ -27,7 +27,7 @@
         <div v-else class="col-xs-12">
           <results></results>
         </div>
-        <div v-if="loggedIn" class="col-xs-3">
+        <div v-show="loggedIn" class="col-xs-3">
           <div>
             <MyMusic></MyMusic>
           </div>
