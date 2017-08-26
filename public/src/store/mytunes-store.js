@@ -90,6 +90,18 @@ var store = new vuex.Store({
     showPlaylists({ commit, dispatch }) {
       commit('showPlaylists')
     },
+    saveOrder({ commit, dispatch }, payload) {
+      $.ajax({
+        contentType: 'application/json',
+        method: 'PUT',
+        url: '//localhost:3000/api/playlists/' + payload._id,
+        data: JSON.stringify(payload)
+      })
+        .then(() => {
+          commit('setCurrentPlaylist', payload)
+        })
+        .fail(() => logError())
+    },
     signup({ commit, dispatch }, user) {
       $.post('//localhost:3000/register', user).then((user) => {
         commit('login', user)

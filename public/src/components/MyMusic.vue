@@ -7,24 +7,32 @@
             </ul>
         </div>
         <div v-show="currentList">
-            <h4>{{currentPlaylist.title}}</h4>
-            <ul v-for="song in currentPlaylist.songs">
-                <li>{{song.trackName}}</li>
-            </ul>
+            <h4>{{playlist.title}}</h4>
+
+            <draggable class="list-group" v-model="playlist.songs">
+                <ul v-for="song in playlist.songs">
+                    <li class="list-group-item">{{song.trackName}}</li>
+                </ul>
+            </draggable>
         </div>
         <input type="text" placeholder="Playlist Name" v-model="playlistName">
         <button type="button" @click="addPlaylist">Add Playlist</button>
         <button type="button" @click="showPlaylists">Show All Playlists</button>
+        <button type="button" @click="saveOrder">Save Order Change</button>
+
     </div>
 </template>
 
 
 <script>
+    import draggable from 'vuedraggable'
     export default {
+
         name: 'myMusic',
         data() {
             return {
-                playlistName: ''
+                playlistName: '',
+                playlist: {}
             }
         },
         methods: {
@@ -42,6 +50,9 @@
             },
             showPlaylists() {
                 this.$store.dispatch('showPlaylists')
+            },
+            saveOrder() {
+                this.$store.dispatch('saveOrder', this.playlist)
             }
         },
         computed: {
@@ -49,11 +60,23 @@
                 return this.$store.state.playlists
             },
             currentPlaylist() {
-                return this.$store.state.currentPlaylist
+                this.playlist = this.$store.state.currentPlaylist
             },
+            // currentPlaylist: {
+            //     get() {
+            //         return this.$store.state.currentPlaylist
+            //     },
+            //     set(value) {
+            //         console.log(value)
+            //         this.$store.dispatch('setCurrentPlaylistSongs', value)
+            //     }
+            // },
             currentList() {
                 return this.$store.state.currentList
             }
+        },
+        components: {
+            draggable
         }
     }
 

@@ -4,10 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import store from './store/mytunes-store.js'
 
+// import Sortable from 'vue-sortable'
+
+// Vue.use(Sortable)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   template: '<App/>',
   store,
-  components: { App }
+  components: {
+    App
+  }
 })
