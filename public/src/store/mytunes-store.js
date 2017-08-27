@@ -25,6 +25,7 @@ var store = new vuex.Store({
     login(state, user) {
       state.user = user.data
       state.loggedIn = true
+      console.log(state.user)
     },
     logout(state) {
       state.user = {}
@@ -35,7 +36,6 @@ var store = new vuex.Store({
     },
     addPlaylist(state, payload) {
       state.playlists.push(payload)
-      console.log(state.playlists)
     },
     setCurrentPlaylist(state, payload) {
       state.currentPlaylist = payload
@@ -43,6 +43,7 @@ var store = new vuex.Store({
     },
     showPlaylists(state) {
       state.currentList = false
+      currentPlaylist = {}
     }
   },
   actions: {

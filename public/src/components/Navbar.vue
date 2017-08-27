@@ -19,18 +19,41 @@
                             <input type="password" class="form-control" placeholder="password" v-model="password" required>
                         </div>
                         <button type="submit" class="btn btn-default">Login</button>
-                        <button type="button" class="btn btn-default" @click="signup">Signup</button>
+                        <button type="button" class="btn btn-default" @click="openDialog('dialog1')">Signup</button>
                     </form>
                     <div v-show="loggedIn" class="nav navbar navbar-right">
-                        <h4>Hello, {{user.email}}</h4>
+                        <h4 style="display: inline-block">Hello, {{user.name}}</h4>
                         <button type="button" class="btn btn-default" @click="logout">Logout</button>
                     </div>
-                    <!-- <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Skills</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Resume</a></li>
-                    </ul> -->
                 </div>
+                <md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
+                    <md-dialog-title>Create New Account</md-dialog-title>
+
+                    <md-dialog-content>
+                        <form>
+                            <md-input-container>
+                                <label>Name</label>
+                                <md-input v-model="name"></md-input>
+                            </md-input-container>
+                            <md-input-container>
+                                <label>email</label>
+                                <md-input v-model="email"></md-input>
+                            </md-input-container>
+                            <md-input-container>
+                                <label>Password</label>
+                                <md-input type="password" v-model="password"></md-input>
+                            </md-input-container>
+                        </form>
+                    </md-dialog-content>
+
+                    <md-dialog-actions>
+                        <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
+                        <md-button class="md-primary" @click="closeDialog('dialog1')">Signup</md-button>
+                    </md-dialog-actions>
+                </md-dialog>
+
+
+                <!-- <md-button class="md-primary md-raised" @click="openDialog('dialog6')">Prompt</md-button> -->
             </div>
         </nav>
     </div>
@@ -41,6 +64,7 @@
         name: 'navbar',
         data() {
             return {
+                name: '',
                 email: '',
                 password: '',
                 loggedIn: false
@@ -49,13 +73,15 @@
         methods: {
             signup() {
                 var user = {
+                    name: this.name,
                     email: this.email,
                     password: this.password
                 }
                 this.$store.dispatch('signup', user)
                 this.loggedIn = true
+                this.name = ''
                 this.email = ''
-                this.password= ''
+                this.password = ''
             },
             login() {
                 var user = {
@@ -65,11 +91,18 @@
                 this.$store.dispatch('login', user)
                 this.loggedIn = true
                 this.email = ''
-                this.password= ''
+                this.password = ''
             },
             logout() {
                 this.$store.dispatch('logout')
                 this.loggedIn = false
+            },
+            openDialog(ref) {
+                this.$refs[ref].open();
+            },
+            closeDialog(ref) {
+                this.$refs[ref].close();
+                this.signup()
             }
         },
         computed: {

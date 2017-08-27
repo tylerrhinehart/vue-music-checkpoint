@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store/mytunes-store.js'
+import VueMaterial from 'vue-material'
+
+import 'vue-material/dist/vue-material.css'
+Vue.use(VueMaterial)
+
 
 // import Sortable from 'vue-sortable'
 
@@ -13,6 +18,7 @@ new Vue({
   el: '#app',
   template: '<App/>',
   store,
+  VueMaterial,
   components: {
     App
   }

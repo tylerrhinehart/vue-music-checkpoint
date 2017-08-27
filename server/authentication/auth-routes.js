@@ -4,7 +4,6 @@ let Users = require('../models/user')
 router.post('/register', (req, res) => {
   Users.create(req.body)
     .then((user) => {
-      console.log(req)
       req.session.uid = user.id
       req.session.save()
       user.password = null

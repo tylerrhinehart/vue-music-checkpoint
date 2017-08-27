@@ -9,7 +9,7 @@
         <div v-show="currentList">
             <h4>{{playlist.title}}</h4>
 
-            <draggable class="list-group" v-model="playlist.songs">
+            <draggable class="list-group" v-model="playlist.songs" @end="saveOrder">
                 <ul v-for="song in playlist.songs">
                     <li class="list-group-item">{{song.trackName}}</li>
                 </ul>
@@ -18,7 +18,7 @@
         <input type="text" placeholder="Playlist Name" v-model="playlistName">
         <button type="button" @click="addPlaylist">Add Playlist</button>
         <button type="button" @click="showPlaylists">Show All Playlists</button>
-        <button type="button" @click="saveOrder">Save Order Change</button>
+        <!-- <button type="button" @click="saveOrder">Save Order Change</button> -->
 
     </div>
 </template>
