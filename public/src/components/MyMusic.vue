@@ -11,7 +11,8 @@
 
             <draggable class="list-group" v-model="playlist.songs" @end="saveOrder">
                 <ul v-for="song in currentPlaylist.songs">
-                    <li class="list-group-item">{{song.trackName}}</li>
+                    <li class="list-group-item">{{song.trackName}} <i class="material-icons" @click="playSong(song.previewUrl)">play_arrow</i><i @click="removeSong(song.trackName)"
+                            class="material-icons">remove_circle</i></li>
                 </ul>
             </draggable>
         </div>
@@ -53,6 +54,20 @@
             },
             saveOrder() {
                 this.$store.dispatch('saveOrder', this.playlist)
+            },
+            playSong(song) {
+                this.$store.dispatch('playSong', song)
+            },
+            removeSong(songToRemove) {
+                // debugger
+                this.playlist.songs.forEach((song) => {
+                    if (song.trackName == songToRemove) {
+                        this.playlist.songs.splice(this.playlist.songs.indexOf(song), 1)
+                        this.saveOrder()
+                    } else {
+                        return
+                    }
+                })
             }
         },
         computed: {
