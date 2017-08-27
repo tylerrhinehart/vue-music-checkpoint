@@ -109,9 +109,12 @@
                 this.$refs[ref].close();
             },
             closeDialog(ref) {
-                if (this.password == this.comfirmPassword) {
+                if (this.password == this.confirmPassword) {
                     this.$refs[ref].close();
                     this.signup()
+                }
+                else {
+                    console.log('it broke')
                 }
             }
         },

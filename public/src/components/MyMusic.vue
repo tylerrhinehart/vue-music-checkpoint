@@ -10,7 +10,7 @@
             <h4>{{playlist.title}}</h4>
 
             <draggable class="list-group" v-model="playlist.songs" @end="saveOrder">
-                <ul v-for="song in playlist.songs">
+                <ul v-for="song in currentPlaylist.songs">
                     <li class="list-group-item">{{song.trackName}}</li>
                 </ul>
             </draggable>
@@ -61,6 +61,7 @@
             },
             currentPlaylist() {
                 this.playlist = this.$store.state.currentPlaylist
+                return this.$store.state.currentPlaylist
             },
             // currentPlaylist: {
             //     get() {
