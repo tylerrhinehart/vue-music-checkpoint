@@ -43,11 +43,15 @@
                                 <label>Password</label>
                                 <md-input type="password" v-model="password"></md-input>
                             </md-input-container>
+                            <md-input-container>
+                                <label>Confirm Password</label>
+                                <md-input type="password" v-model="confirmPassword"></md-input>
+                            </md-input-container>
                         </form>
                     </md-dialog-content>
 
                     <md-dialog-actions>
-                        <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
+                        <md-button class="md-primary" @click="cancelDialog('dialog1')">Cancel</md-button>
                         <md-button class="md-primary" @click="closeDialog('dialog1')">Signup</md-button>
                     </md-dialog-actions>
                 </md-dialog>
@@ -67,6 +71,7 @@
                 name: '',
                 email: '',
                 password: '',
+                confirmPassword: '',
                 loggedIn: false
             }
         },
@@ -100,9 +105,14 @@
             openDialog(ref) {
                 this.$refs[ref].open();
             },
-            closeDialog(ref) {
+            cancelDialog(ref) {
                 this.$refs[ref].close();
-                this.signup()
+            },
+            closeDialog(ref) {
+                if (this.password == this.comfirmPassword) {
+                    this.$refs[ref].close();
+                    this.signup()
+                }
             }
         },
         computed: {

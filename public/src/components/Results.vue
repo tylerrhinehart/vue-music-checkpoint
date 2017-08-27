@@ -4,7 +4,8 @@
     <!-- <my-tunes class="my-tunes"></my-tunes> -->
     <!-- <itunes class="itunes"></itunes> -->
     <div class="row">
-      <div class="col-xs-8 col-xs-offset-2 col-sm-3" v-for="song in songs">
+      <!-- <draggable> -->
+      <div class="col-xs-12 col-xs-offset-2 col-sm-3" v-for="song in songs">
         <div class="card thumbnail overflow">
           <img :src='song.artworkUrl100' alt="albumArt">
           <div class="card-body">
@@ -12,23 +13,32 @@
             <h4>{{song.artistName}}</h4>
             <h5>{{song.collectionName}}</h5>
             <p>${{song.collectionPrice}}</p>
-            <audio controls class="audio-controls">
-              <source :src="song.previewUrl" type="audio/mp4" />
-            </audio>
-            <button type="button" class="btn btn-primary" @click="addToMyTunes(song)">Add to Playlist</button>
+            <!-- <audio controls class="audio-controls">
+                <source :src="song.previewUrl" type="audio/mp4" />
+              </audio> -->
+            <i class="material-icons" @click="playSong(song.previewUrl)">play_arrow</i>
+            <i class="material-icons" @click="addToMyTunes(song)">playlist_add</i>
           </div>
         </div>
       </div>
+      <!-- </draggable> -->
     </div>
+    <!-- <md-bottom-bar id="player">
+      <audio ref="player" controls class="audio-controls">
+        <source src="song" type="audio/mp4" />
+      </audio>
+
+    </md-bottom-bar> -->
   </div>
 </template>
 
 <script>
+  import draggable from 'vuedraggable'
   export default {
     name: 'results',
     data() {
       return {
-
+        song: ''
       }
     },
     methods: {
@@ -43,14 +53,23 @@
         }
         var playlist = this.$store.state.currentPlaylist
         playlist.songs.push(song)
-        console.log(playlist)
         this.$store.dispatch('addToMyTunes', playlist)
+      },
+      playSong(song) {
+        this.$store.dispatch('playSong', song)
+        // this.song = song
+        // this.$refs.player.src = this.song
+        // this.$refs.player.load()
+        // this.$refs.player.play()
       }
     },
     computed: {
       songs() {
         return this.$store.state.results
       }
+    },
+    components: {
+      draggable
     }
   }
 

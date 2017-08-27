@@ -27,12 +27,13 @@
         <div v-else class="col-xs-12">
           <results></results>
         </div>
-        <div v-show="loggedIn" class="col-xs-3">
+        <div v-show="showMyMusic" class="col-xs-3">
           <div>
             <MyMusic></MyMusic>
           </div>
         </div>
       </div>
+      <player></player>
     </div>
   </div>
   </div>
@@ -42,6 +43,7 @@
   import Results from './components/Results'
   import MyMusic from './components/MyMusic'
   import Navbar from './components/Navbar'
+  import Player from './components/Bottom-player'
 
   export default {
     name: 'app',
@@ -54,7 +56,8 @@
     components: {
       Results,
       MyMusic,
-      Navbar
+      Navbar,
+      Player
     },
     methods: {
       getMusic() {
@@ -69,6 +72,9 @@
     computed: {
       loggedIn() {
         return this.$store.state.loggedIn
+      },
+      currentSong() {
+        return this.$store.state.currentSong
       }
     }
   }

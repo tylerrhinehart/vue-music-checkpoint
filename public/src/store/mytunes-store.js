@@ -10,6 +10,7 @@ var store = new vuex.Store({
     playlists: [],
     currentPlaylist: {},
     currentList: false,
+    currentSong: '',
     results: [],
     user: {},
     loggedIn: false,
@@ -20,12 +21,10 @@ var store = new vuex.Store({
     },
     getMyTunes(state, data) {
       state.playlists = data
-      console.log(data)
     },
     login(state, user) {
       state.user = user.data
       state.loggedIn = true
-      console.log(state.user)
     },
     logout(state) {
       state.user = {}
@@ -44,6 +43,10 @@ var store = new vuex.Store({
     showPlaylists(state) {
       state.currentList = false
       currentPlaylist = {}
+    },
+    playSong(state, payload) {
+      state.currentSong = payload
+      console.log(state.currentSong)
     }
   },
   actions: {
@@ -80,6 +83,9 @@ var store = new vuex.Store({
     },
     demoteTrack({ commit, dispatch }, track) {
       //this should decrease the position / upvotes and downvotes on the track
+    },
+    playSong({ commit, dispatch }, payload) {
+      commit('playSong', payload)
     },
     addPlaylist({ commit, dispatch }, payload) {
       $.post('//localhost:3000/api/playlists', payload).then((playlist) => {
