@@ -31,13 +31,13 @@
         </div>
       </div>
       <div class="row">
-        <div v-if="showMyMusic" class="col-xs-9">
+        <div v-if="showMyMusic" class="col-xs-6 col-md-9">
           <results></results>
         </div>
         <div v-else class="col-xs-12">
           <results></results>
         </div>
-        <div v-show="showMyMusic" class="col-xs-3">
+        <div v-show="showMyMusic" class="col-xs-6 col-md-3">
           <MyMusic></MyMusic>
         </div>
       </div>

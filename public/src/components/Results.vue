@@ -5,7 +5,7 @@
     <!-- <itunes class="itunes"></itunes> -->
     <div class="row">
       <!-- <draggable> -->
-      <div class="col-xs-12 col-sm-4" v-for="song in songs">
+      <div class="col-xs-12 col-md-4" v-for="song in songs">
         <div class="card thumbnail overflow">
           <img :src='song.artworkUrl100' alt="albumArt">
           <div class="card-body">
