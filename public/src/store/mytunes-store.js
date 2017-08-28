@@ -2,6 +2,9 @@ import vue from 'vue'
 import vuex from 'vuex'
 import $ from 'jquery'
 
+var production = !window.location.host.includes('localhost')
+var baseUrl = production ? '//music-checkpoint.herokuapp.com' : '//localhost:3000'
+
 vue.use(vuex)
 
 var store = new vuex.Store({
@@ -68,7 +71,7 @@ var store = new vuex.Store({
       })
     },
     getMyTunes({ commit, dispatch }, id) {
-      $.get('//localhost:3000/api/playlists/playlist/' + id).then((data) => {
+      $.get(baseUrl + '/api/playlists/playlist/' + id).then((data) => {
         commit('getMyTunes', data)
       })
     },
@@ -76,7 +79,7 @@ var store = new vuex.Store({
       $.ajax({
         contentType: 'application/json',
         method: 'PUT',
-        url: '//localhost:3000/api/playlists/' + payload._id,
+        url: baseUrl + '/api/playlists/' + payload._id,
         data: JSON.stringify(payload)
       })
         .then(() => {
@@ -97,12 +100,12 @@ var store = new vuex.Store({
       commit('playSong', payload)
     },
     addPlaylist({ commit, dispatch }, payload) {
-      $.post('//localhost:3000/api/playlists', payload).then((playlist) => {
+      $.post(baseUrl + '/api/playlists', payload).then((playlist) => {
         commit('addPlaylist', playlist)
       })
     },
     setCurrentPlaylist({ commit, dispatch }, payload) {
-      $.get('//localhost:3000/api/playlists/' + payload).then(playlist => {
+      $.get(baseUrl + '/api/playlists/' + payload).then(playlist => {
         commit('setCurrentPlaylist', playlist)
       })
     },
@@ -113,7 +116,7 @@ var store = new vuex.Store({
       $.ajax({
         contentType: 'application/json',
         method: 'PUT',
-        url: '//localhost:3000/api/playlists/' + payload._id,
+        url: baseUrl + '/api/playlists/' + payload._id,
         data: JSON.stringify(payload)
       })
         .then(() => {
@@ -125,7 +128,7 @@ var store = new vuex.Store({
       $.ajax({
         contentType: 'application/json',
         method: 'DELETE',
-        url: '//localhost:3000/api/playlists/' + payload
+        url: baseUrl + '/api/playlists/' + payload
       })
         .then(() => {
           commit('removePlaylist', payload)
@@ -133,12 +136,12 @@ var store = new vuex.Store({
         .fail(() => logError())
     },
     signup({ commit, dispatch }, user) {
-      $.post('//localhost:3000/register', user).then((user) => {
+      $.post(baseUrl + '/register', user).then((user) => {
         commit('login', user)
       })
     },
     login({ commit, dispatch }, user) {
-      $.post('//localhost:3000/login', user).then((user) => {
+      $.post(baseUrl + '/login', user).then((user) => {
         commit('login', user)
       })
     },
@@ -146,7 +149,7 @@ var store = new vuex.Store({
       $.ajax({
         contentType: 'application/json',
         method: 'DELETE',
-        url: '//localhost:3000/logout'
+        url: baseUrl + '/logout'
 
       })
         .then(commit('logout'))
