@@ -9,13 +9,23 @@
           </div>
         </div>
         <div class="row search-form">
-          <div class="col-xs-12">
-            <form class="form-inline" @submit.prevent="getMusic">
+          <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <!-- <form class="form-inline" @submit.prevent="getMusic">
               <div class="form-group">
                 <input id="search-input" v-model="query" type="text" class="form-control" placeholder="Search for Music" />
                 <button type="button" class="btn btn-primary">Get Music</button>
+                <md-button class="md-raised md-primary">Search</md-button>
+                <md-button class="md-raised md-primary" v-show="loggedIn" type="button" @click="getMyTunes">My Playlists</md-button>
                 <button v-show="loggedIn" type="button" class="btn btn-primary" @click="getMyTunes">My Playlists</button>
               </div>
+            </form> -->
+            <form novalidate class="form-inline" @submit.stop.prevent="getMusic">
+              <md-input-container>
+                <label>Search for Music</label>
+                <md-input id="search-input" v-model="query"></md-input>
+              </md-input-container>
+              <md-button type="submit" class="md-raised md-primary">Search</md-button>
+              <md-button class="md-raised md-primary" v-show="loggedIn" type="button" @click="getMyTunes">My Playlists</md-button>
             </form>
           </div>
         </div>
@@ -28,9 +38,7 @@
           <results></results>
         </div>
         <div v-show="showMyMusic" class="col-xs-3">
-          <div>
-            <MyMusic></MyMusic>
-          </div>
+          <MyMusic></MyMusic>
         </div>
       </div>
       <player></player>
@@ -50,7 +58,7 @@
     data() {
       return {
         query: '',
-        showMyMusic: false
+        showMyMusic: false,
       }
     },
     components: {
@@ -71,6 +79,7 @@
     },
     computed: {
       loggedIn() {
+        this.showMyMusic = this.$store.state.loggedIn
         return this.$store.state.loggedIn
       },
       currentSong() {
@@ -84,6 +93,7 @@
 <style>
   #app {
     text-align: center;
+    overflow: hidden
   }
 
   h1 {
@@ -115,5 +125,7 @@
   #search-input {
     background-color: rgba(200, 200, 200, 0.1);
     text-align: center;
+    height: 5vh;
+    font-size: 4rem;
   }
 </style>

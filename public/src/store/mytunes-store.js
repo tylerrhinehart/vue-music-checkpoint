@@ -29,7 +29,7 @@ var store = new vuex.Store({
     logout(state) {
       state.user = {}
       state.loggedIn = false
-      stae.currentPlaylist = {}
+      state.currentPlaylist = {}
       state.playlists = []
       state.currentList = false
     },

@@ -55,9 +55,6 @@
                         <md-button class="md-primary" @click="closeDialog('dialog1')">Signup</md-button>
                     </md-dialog-actions>
                 </md-dialog>
-
-
-                <!-- <md-button class="md-primary md-raised" @click="openDialog('dialog6')">Prompt</md-button> -->
             </div>
         </nav>
     </div>

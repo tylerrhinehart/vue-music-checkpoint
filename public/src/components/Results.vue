@@ -16,8 +16,14 @@
             <!-- <audio controls class="audio-controls">
                 <source :src="song.previewUrl" type="audio/mp4" />
               </audio> -->
-            <i class="material-icons" @click="playSong(song.previewUrl)">play_arrow</i>
-            <i class="material-icons" @click="addToMyTunes(song)">playlist_add</i>
+            <md-button @click="playSong(song.previewUrl)" class="md-icon-button md-list-action">
+              <md-icon>play_arrow</md-icon>
+            </md-button>
+            <md-button @click="addToMyTunes(song)" class="md-icon-button md-list-action">
+              <md-icon>playlist_add</md-icon>
+            </md-button>
+            <!-- <i class="material-icons" @click="playSong(song.previewUrl)">play_arrow</i> -->
+            <!-- <i class="material-icons" @click="addToMyTunes(song)">playlist_add</i> -->
           </div>
         </div>
       </div>

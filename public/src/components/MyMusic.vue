@@ -38,8 +38,15 @@
                     <span>{{playlist.title}}</span>
                 </md-list-item>
             </md-list>
-            <input type="text" placeholder="Playlist Name" v-model="playlistName">
-            <button type="button" @click="addPlaylist">Add Playlist</button>
+            <!-- <input type="text" placeholder="Playlist Name" v-model="playlistName"> -->
+            <!-- <button type="button" @click="addPlaylist">Add Playlist</button> -->
+            <form novalidate @submit.stop.prevent="addPlaylist">
+                <md-input-container>
+                    <label>Playlist Name</label>
+                    <md-input v-model="playlistName"></md-input>
+                </md-input-container>
+                <md-button class="md-raised md-primary">Add Playlist</md-button>
+            </form>
 
             <md-sidenav class="md-right" ref="rightSidenav" @open="open('Right')" @close="close('Right')">
                 <md-toolbar>
