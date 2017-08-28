@@ -14,7 +14,7 @@
               <div class="form-group">
                 <input id="search-input" v-model="query" type="text" class="form-control" placeholder="Search for Music" />
                 <button type="button" class="btn btn-primary">Get Music</button>
-                <button v-show="loggedIn" type="button" class="btn btn-primary" @click="getMyTunes">Show My Music</button>
+                <button v-show="loggedIn" type="button" class="btn btn-primary" @click="getMyTunes">My Playlists</button>
               </div>
             </form>
           </div>

@@ -51,5 +51,10 @@
         bottom: 0px;
         right: 10px;
         left: 10px;
+        height: 4vh;
+    }
+    audio {
+        position: absolute;
+        bottom: 18px;
     }
 </style>
