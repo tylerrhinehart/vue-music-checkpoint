@@ -15,7 +15,7 @@ var songs = require('./routes/song-routes')
 app.use(cors())
 app.options('*', cors())
 app.use(sessions)
-app.use(express.static(__dirname + '/../client'));
+app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressSanitizer());
