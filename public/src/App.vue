@@ -12,7 +12,7 @@
           <div class="col-xs-12">
             <form class="form-inline" @submit.prevent="getMusic">
               <div class="form-group">
-                <input v-model="query" type="text" class="form-control" placeholder="Search for Music" />
+                <input id="search-input" v-model="query" type="text" class="form-control" placeholder="Search for Music" />
                 <button type="button" class="btn btn-primary">Get Music</button>
                 <button v-show="loggedIn" type="button" class="btn btn-primary" @click="getMyTunes">Show My Music</button>
               </div>
@@ -86,6 +86,10 @@
     text-align: center;
   }
 
+  h1 {
+    font-size: 6rem;
+  }
+
   .header {
     margin-top: 30vh;
     margin-bottom: 3vh;
@@ -96,6 +100,20 @@
     background-position-x: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    text-align: center;
+  }
+
+  .overflow {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #search-input {
+    background-color: rgba(200, 200, 200, 0.1);
     text-align: center;
   }
 </style>

@@ -1,9 +1,10 @@
 <template>
     <div id="my-music">
         <h4>My Music</h4>
-        <div v-show="!currentList">
+        <div v-show="!currentList" class="list-group">
             <ul v-for="playlist in playlists">
-                <li @click="setCurrentPlaylist(playlist._id)">{{playlist.title}}</li>
+                <li class="list-group-item" @click="setCurrentPlaylist(playlist._id)">{{playlist.title}}</li>
+                <i @click="removePlaylist(playlist._id)" class="material-icons">remove_circle</i>
             </ul>
         </div>
         <div v-show="currentList">
@@ -59,7 +60,6 @@
                 this.$store.dispatch('playSong', song)
             },
             removeSong(songToRemove) {
-                // debugger
                 this.playlist.songs.forEach((song) => {
                     if (song.trackName == songToRemove) {
                         this.playlist.songs.splice(this.playlist.songs.indexOf(song), 1)
@@ -68,6 +68,18 @@
                         return
                     }
                 })
+            },
+            removePlaylist(id) {
+                console.log(id)
+                this.$store.dispatch('removePlaylist', id)
+                // this.playlist.songs.forEach((song) => {
+                //     if (song.trackName == songToRemove) {
+                //         this.playlist.songs.splice(this.playlist.songs.indexOf(song), 1)
+                //         this.saveOrder()
+                //     } else {
+                //         return
+                //     }
+                // })
             }
         },
         computed: {

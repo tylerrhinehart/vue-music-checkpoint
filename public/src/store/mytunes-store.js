@@ -47,6 +47,15 @@ var store = new vuex.Store({
     playSong(state, payload) {
       state.currentSong = payload
       console.log(state.currentSong)
+    },
+    removePlaylist(state, payload) {
+      state.playlists.forEach((playlist) => {
+        if (playlist._id == payload) {
+          state.playlists.splice(state.playlists.indexOf(playlist), 1)
+        } else {
+          return
+        }
+      })
     }
   },
   actions: {
@@ -109,6 +118,17 @@ var store = new vuex.Store({
       })
         .then(() => {
           commit('setCurrentPlaylist', payload)
+        })
+        .fail(() => logError())
+    },
+    removePlaylist({ commit, dispatch }, payload) {
+      $.ajax({
+        contentType: 'application/json',
+        method: 'DELETE',
+        url: '//localhost:3000/api/playlists/' + payload
+      })
+        .then(() => {
+          commit('removePlaylist', payload)
         })
         .fail(() => logError())
     },

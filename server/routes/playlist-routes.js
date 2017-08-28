@@ -22,7 +22,7 @@ router
     .put('/:id', (req, res, next) => {
         playlists.findByIdAndUpdate(req.params.id, req.body)
             .then(playlist => {
-                res.send({message: 'successfully added song'})
+                res.send({ message: 'successfully added song' })
             }).catch(next)
     })
 
@@ -30,6 +30,13 @@ router
         playlists.create(req.body)
             .then(playlist => {
                 res.send(playlist)
+            }).catch(next)
+    })
+
+    .delete('/:id', (req, res, next) => {
+        playlists.findByIdAndRemove(req.params.id)
+            .then(playlist => {
+                res.send({ message: 'Successfully Removed' })
             }).catch(next)
     })
 

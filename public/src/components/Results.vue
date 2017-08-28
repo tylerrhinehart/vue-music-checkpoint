@@ -90,4 +90,22 @@
   min-height: 500px;
   min-width: 45%;
 } */
+
+  .card {
+    background-image: url("https://images.pexels.com/photos/41498/pexels-photo-41498.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  #songs {
+    margin-top: 10vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+  }
+
+  img {
+    max-width: 50%;
+    max-height: 50%;
+  }
 </style>
