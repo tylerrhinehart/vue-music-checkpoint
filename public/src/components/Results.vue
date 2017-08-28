@@ -7,7 +7,7 @@
       <!-- <draggable> -->
       <div class="col-xs-12 col-md-4" v-for="song in songs">
         <div class="card thumbnail overflow">
-          <img :src=//'song.artworkUrl100' alt="albumArt">
+          <img :src='song.artworkUrl100' alt="albumArt">
           <div class="card-body">
             <h4 class="title">{{song.trackName}}</h4>
             <h4>{{song.artistName}}</h4>
