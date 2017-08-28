@@ -30,7 +30,7 @@
                     <i @click="removePlaylist(playlist._id)" class="material-icons">remove_circle</i>
                 </ul>
             </div> -->
-            <md-list v-for="playlist in playlists">
+            <md-list id="list" v-for="playlist in playlists">
                 <md-list-item @click="setCurrentPlaylist(playlist._id)">
                     <md-button @click="removePlaylist(playlist._id)" class="md-icon-button md-list-action">
                         <md-icon>remove_circle</md-icon>
@@ -173,5 +173,8 @@
         border: 2px, solid, black;
         max-height: 40vh;
         overflow-y: auto;
+    }
+    #my-music {
+        height: 60vh;
     }
 </style>
