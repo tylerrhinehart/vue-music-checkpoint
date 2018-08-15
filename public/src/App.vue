@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="row search-form">
-          <div class="col-xs-12 col-md-6 col-md-offset-3">
+          <div class="col-xs-12 col-md-4 col-md-offset-4">
             <form novalidate class="form-inline" @submit.stop.prevent="getMusic">
               <md-input-container>
                 <label class="search-label">Search for Music</label>
