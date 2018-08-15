@@ -1,36 +1,10 @@
 <template>
     <div id="my-music">
-        <!-- <h4>My Music</h4>
-        <div v-show="!currentList" class="list-group">
-            <ul v-for="playlist in playlists">
-                <li class="list-group-item" @click="setCurrentPlaylist(playlist._id)">{{playlist.title}}</li>
-                <i @click="removePlaylist(playlist._id)" class="material-icons">remove_circle</i>
-            </ul>
-        </div>
-        <div v-show="currentList">
-            <h4>{{playlist.title}}</h4>
-
-            <draggable class="list-group" v-model="playlist.songs" @end="saveOrder">
-                <ul v-for="song in currentPlaylist.songs">
-                    <li class="list-group-item">{{song.trackName}} <i class="material-icons" @click="playSong(song.previewUrl)">play_arrow</i><i @click="removeSong(song.trackName)"
-                            class="material-icons">remove_circle</i></li>
-                </ul>
-            </draggable>
-        </div>
-        <input type="text" placeholder="Playlist Name" v-model="playlistName">
-        <button type="button" @click="addPlaylist">Add Playlist</button>
-        <button type="button" @click="showPlaylists">Show All Playlists</button> -->
         <div id="side-bar">
             <md-toolbar>
                 <h2 class="md-title">My Playlists</h2>
             </md-toolbar>
-            <!-- <div class="list-group">
-                <ul v-for="playlist in playlists">
-                    <li class="list-group-item" @click="setCurrentPlaylist(playlist._id)">{{playlist.title}}</li>
-                    <i @click="removePlaylist(playlist._id)" class="material-icons">remove_circle</i>
-                </ul>
-            </div> -->
-            <md-list id="list" v-for="playlist in playlists">
+            <md-list id="list" v-for="(playlist, i) in playlists" :key="i">
                 <md-list-item @click="setCurrentPlaylist(playlist._id)">
                     <md-button @click="removePlaylist(playlist._id)" class="md-icon-button md-list-action">
                         <md-icon>remove_circle</md-icon>
@@ -38,8 +12,6 @@
                     <span>{{playlist.title}}</span>
                 </md-list-item>
             </md-list>
-            <!-- <input type="text" placeholder="Playlist Name" v-model="playlistName"> -->
-            <!-- <button type="button" @click="addPlaylist">Add Playlist</button> -->
             <form novalidate @submit.stop.prevent="addPlaylist">
                 <md-input-container>
                     <label>Playlist Name</label>
@@ -55,9 +27,9 @@
                     </div>
                 </md-toolbar>
                 <draggable class="list-group" v-model="playlist.songs" @end="saveOrder">
-                    <md-list v-for="song in currentPlaylist.songs">
+                    <md-list v-for="(song, i) in currentPlaylist.songs" :key="i">
                         <md-list-item>
-                            <md-button @click="playSong(song.previewUrl)" class="md-icon-button md-list-action">
+                            <md-button @click="playSong(song.previewUrl)" class="md-icon-button md-list-action playlist-play">
                                 <md-icon>play_arrow</md-icon>
                             </md-button>
                             <md-button @click="removeSong(song.trackName)" class="md-icon-button md-list-action">
@@ -66,11 +38,6 @@
                             <span>{{song.trackName}}</span>
                         </md-list-item>
                     </md-list>
-                    <!-- <ul v-for="song in currentPlaylist.songs">
-                        <li class="list-group-item">{{song.trackName}} <i class="material-icons" @click="playSong(song.previewUrl)">play_arrow</i>
-                            <i @click="removeSong(song.trackName)" class="material-icons">remove_circle</i>
-                        </li>
-                    </ul> -->
                 </draggable>
                 <md-button class="md-raised md-accent" @click="closeRightSidenav">Close</md-button>
             </md-sidenav>
@@ -176,5 +143,9 @@
     }
     #my-music {
         height: 60vh;
+    }
+
+    .playlist-play {
+        margin-right: 0;
     }
 </style>

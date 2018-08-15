@@ -142,7 +142,8 @@ var store = new vuex.Store({
     },
     login({ commit, dispatch }, user) {
       $.post(baseUrl + '/login', user).then((user) => {
-        commit('login', user)
+        commit('login', user);
+        dispatch('getMyTunes', user.data._id);
       })
     },
     logout({ commit, dispatch }) {
