@@ -5,27 +5,18 @@
       <div class="header">
         <div class="row">
           <div class="col-xs-12">
-            <h1>Find Your Flavor</h1>
+            <h1 class="site-title">Find Your Flavor</h1>
           </div>
         </div>
         <div class="row search-form">
           <div class="col-xs-12 col-md-6 col-md-offset-3">
-            <!-- <form class="form-inline" @submit.prevent="getMusic">
-              <div class="form-group">
-                <input id="search-input" v-model="query" type="text" class="form-control" placeholder="Search for Music" />
-                <button type="button" class="btn btn-primary">Get Music</button>
-                <md-button class="md-raised md-primary">Search</md-button>
-                <md-button class="md-raised md-primary" v-show="loggedIn" type="button" @click="getMyTunes">My Playlists</md-button>
-                <button v-show="loggedIn" type="button" class="btn btn-primary" @click="getMyTunes">My Playlists</button>
-              </div>
-            </form> -->
             <form novalidate class="form-inline" @submit.stop.prevent="getMusic">
               <md-input-container>
-                <label>Search for Music</label>
-                <md-input id="search-input" v-model="query"></md-input>
+                <label class="search-label">Search for Music</label>
+                <md-input class="search-input" id="search-input" v-model="query"></md-input>
               </md-input-container>
               <md-button type="submit" class="md-raised md-primary">Search</md-button>
-              <md-button class="md-raised md-primary" v-show="loggedIn" type="button" @click="getMyTunes">My Playlists</md-button>
+              <md-button class="md-raised md-primary" v-show="loggedIn" type="button" @click="getMyTunes"><span v-text="showMyMusic ? 'Hide' : 'Show'"></span> Playlists</md-button>
             </form>
           </div>
         </div>
@@ -43,7 +34,6 @@
       </div>
       <player></player>
     </div>
-  </div>
   </div>
 </template>
 
@@ -96,13 +86,24 @@
     overflow: hidden
   }
 
-  h1 {
+  .site-title {
     font-size: 6rem;
+    color: #ffffff;
   }
 
   .header {
-    margin-top: 30vh;
+    margin-top: 17vh;
     margin-bottom: 3vh;
+  }
+
+  .search-label, .search-input {
+    color: #ffffff !important;
+  }
+
+  .md-theme-default.md-input-container.md-input-focused input {
+    color: #ffffff !important;
+    text-shadow: unset !important;
+    -webkit-text-fill-color: unset !important;
   }
 
   body {

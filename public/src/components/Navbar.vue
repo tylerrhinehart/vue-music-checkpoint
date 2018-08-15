@@ -10,7 +10,7 @@
                           <span class="icon-bar"></span>
                           <span class="icon-bar"></span>
                         </button>
-                    <a class="navbar-brand" href="#">Tyler Rhinehart- Vue Music Checkpoint</a>
+                    <a class="navbar-brand" href="#">Music Finder</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form v-show="!loggedIn" class="navbar-form navbar-right" @submit.prevent="login">
@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-default">Login</button>
                         <button type="button" class="btn btn-default" @click="openDialog('dialog1')">Signup</button>
                     </form>
-                    <div v-show="loggedIn" class="nav navbar navbar-right">
+                    <div v-show="loggedIn" class="logged-in nav navbar navbar-right">
                         <h4 style="display: inline-block">Hello, {{user.name}}</h4>
                         <button type="button" class="btn btn-default" @click="logout">Logout</button>
                     </div>
@@ -61,65 +61,83 @@
 </template>
 
 <script>
-    export default {
-        name: 'navbar',
-        data() {
-            return {
-                name: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                loggedIn: false
-            }
-        },
-        methods: {
-            signup() {
-                var user = {
-                    name: this.name,
-                    email: this.email,
-                    password: this.password
-                }
-                this.$store.dispatch('signup', user)
-                this.loggedIn = true
-                this.name = ''
-                this.email = ''
-                this.password = ''
-            },
-            login() {
-                var user = {
-                    email: this.email,
-                    password: this.password
-                }
-                this.$store.dispatch('login', user)
-                this.loggedIn = true
-                this.email = ''
-                this.password = ''
-            },
-            logout() {
-                this.$store.dispatch('logout')
-                this.loggedIn = false
-            },
-            openDialog(ref) {
-                this.$refs[ref].open();
-            },
-            cancelDialog(ref) {
-                this.$refs[ref].close();
-            },
-            closeDialog(ref) {
-                if (this.password == this.confirmPassword) {
-                    this.$refs[ref].close();
-                    this.signup()
-                }
-                else {
-                    console.log('it broke')
-                }
-            }
-        },
-        computed: {
-            user() {
-                return this.$store.state.user
-            }
-        }
+export default {
+  name: "navbar",
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      loggedIn: false
+    };
+  },
+  methods: {
+    signup() {
+      var user = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      };
+      this.$store.dispatch("signup", user);
+      this.loggedIn = true;
+      this.name = "";
+      this.email = "";
+      this.password = "";
+    },
+    login() {
+      var user = {
+        email: this.email,
+        password: this.password
+      };
+      this.$store.dispatch("login", user);
+      this.loggedIn = true;
+      this.email = "";
+      this.password = "";
+    },
+    logout() {
+      this.$store.dispatch("logout");
+      this.loggedIn = false;
+    },
+    openDialog(ref) {
+      this.$refs[ref].open();
+    },
+    cancelDialog(ref) {
+      this.$refs[ref].close();
+    },
+    closeDialog(ref) {
+      if (this.password == this.confirmPassword) {
+        this.$refs[ref].close();
+        this.signup();
+      } else {
+        console.log("it broke");
+      }
     }
-
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+  },
+  mounted() {
+    if (!this.loggedIn) {
+      var user = {
+        email: 'demo@example.com',
+        password: 'password'
+      };
+      this.$store.dispatch("login", user);
+      this.loggedIn = true;
+    }
+  }
+};
 </script>
+
+<style>
+.logged-in {
+  margin-bottom: 0;
+}
+
+.logged-in h4 {
+  margin-right: 1rem;
+}
+</style>
